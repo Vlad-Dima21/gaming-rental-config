@@ -1,0 +1,31 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+spring:
+  cloud:
+    config:
+      override-system-properties: false
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+resilience4j:
+  ratelimiter:
+    metrics:
+      enabled: true
+    configs:
+      default:
+        limit-for-period: 5
+        limit-refresh-period: 10s
+        timeout-duration: 5s
+        allow-health-indicator-to-fail: true
+        subscribe-for-events: true
+        event-consumer-buffer-size: 50
+  time-limiter:
+    configs:
+      default:
+        timeout-duration: 5s

@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/product
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+server:
+  port: 8050
+
+resilience4j:
+  ratelimiter:
+    instances:
+      deviceBaseControllerLimiter:
+        baseConfig: default
+      deviceControllerLimiter:
+        baseConfig: default
+      gameCopyControllerLimiter:
+        baseConfig: default
+
+openapi:
+  title: Product Service API
+  description: Product Service API docs.
+  version: 1.0.0
+  url: http://localhost:${server.port}
+springdoc:
+  api-docs:
+    path: /product-service/v3/api-docs
+  swagger-ui:
+    path: /product-service/swagger-ui.html

@@ -1,0 +1,40 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: client-service
+          uri: lb:http://CLIENT-SERVICE
+          predicates:
+            - Path=/api/clients/**, /client-service/**
+        - id: product-service
+          uri: lb:http://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/devices/**, /api/units/**, /api/games/**, /product-service/**
+        - id: rental-service
+          uri: lb:http://RENTAL-SERVICE
+          predicates:
+            - Path=/api/rentals/**, /rental-service/**
+server:
+  port: 8222
+  servlet:
+    context-path: /
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+      - url: /client-service/v3/api-docs
+        name: Client Service
+      - url: /product-service/v3/api-docs
+        name: Product Service
+      - url: /rental-service/v3/api-docs
+        name: Rental Service
