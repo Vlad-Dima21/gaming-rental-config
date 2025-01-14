@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres-rental:5432/rental
+application:
+  config:
+    client-url: http://client-service:8090/api/clients
+    device-url: http://product-service:8050/api/units
+    game-url: http://rental-service:8070/api/games
