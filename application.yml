@@ -19,8 +19,8 @@ resilience4j:
       enabled: true
     configs:
       default:
-        limit-for-period: 5
-        limit-refresh-period: 10s
+        limit-for-period: 15
+        limit-refresh-period: 15s
         timeout-duration: 5s
         allow-health-indicator-to-fail: true
         subscribe-for-events: true
